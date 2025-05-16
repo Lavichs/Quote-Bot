@@ -42,7 +42,7 @@ INLINE_MARKUP = InlineKeyboardMarkup(INLINE_KEYBOARD)
 
 last_message_id = {}
 
-ADD_QUOTE_FLAG, GET_QUOTE_FLAG = range(2)
+ADD_QUOTE_FLAG = range(1)
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -57,7 +57,6 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def press_button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     query = update.callback_query
     await query.answer()
-    chat_id = update.effective_chat.id
 
     logger.info(f"Button pressed: {query.data}")
 
@@ -121,7 +120,6 @@ def main():
         entry_points=[CallbackQueryHandler(press_button)],
         states={
             ADD_QUOTE_FLAG: [MessageHandler(filters.TEXT & ~filters.COMMAND, add_quote)],
-            # GET_QUOTE_FLAG: [MessageHandler(filters.TEXT & ~filters.COMMAND, get_quote)],
         },
         fallbacks=[CommandHandler('cancel', cancel)],
     )
