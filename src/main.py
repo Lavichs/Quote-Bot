@@ -42,7 +42,7 @@ INLINE_MARKUP = InlineKeyboardMarkup(INLINE_KEYBOARD)
 
 last_message_id = {}
 
-ADD_QUOTE_FLAG = range(1)
+ADD_QUOTE_FLAG, ANY_OTHER_FLAG = range(2)
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
