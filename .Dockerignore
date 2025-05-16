@@ -1,0 +1,10 @@
+.idea
+metgbotenv
+logs
+__pycache__/
+
+bot.py
+bot_prev.py
+
+
+
