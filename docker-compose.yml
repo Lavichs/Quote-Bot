@@ -11,7 +11,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
-      - "${DB_PUBLIC_PORT}:5432"
+      - "5430-5500:5432"
 
   bot:
     build: .
