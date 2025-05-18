@@ -64,13 +64,13 @@ async def press_button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
         await query.edit_message_text(text="Введите цитату", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text=CANCEL_BUTTON.text, callback_data=CANCEL_BUTTON.callback_data)]]))
         return ADD_QUOTE_FLAG
     elif query.data == RAND_QUOTE:
-        await query.edit_message_text("Случайная цитата:", reply_markup=INLINE_MARKUP)
+        await query.edit_message_text("Случайная цитата: ...", reply_markup=INLINE_MARKUP)
         async with async_session_maker() as session:
             query_to_db = select(QuoteOrm).order_by(func.random()).limit(1)
             result = await session.execute(query_to_db)
             quote_obj = result.scalar()
             quote = quote_obj.content if (quote_obj is not None) else "Всё, что обозримо – то не вечно"
-            await query.edit_message_text(f"Случайная цитата: {quote}", reply_markup=None)
+            await query.edit_message_text(quote, reply_markup=None)
             await context.bot.send_message(chat_id=update.effective_chat.id,
                                            text=f"Выберите действие",
                                            reply_markup=INLINE_MARKUP)
